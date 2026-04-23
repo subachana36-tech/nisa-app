@@ -1,0 +1,625 @@
+:root {
+    --primary-color: #1e3a8a;
+    /* Deep Navy */
+    --secondary-color: #3b82f6;
+    /* Modern Blue */
+    --accent-color: #10b981;
+    /* Success Green */
+    --gold-color: #f59e0b;
+    /* Gold accent */
+    --bg-color: #f1f5f9;
+    /* Soft Slate Gray */
+    --card-bg: #ffffff;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Noto Sans JP', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+/* Header */
+header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 0 1rem 6rem;
+    text-align: center;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+}
+
+.header-container h1 {
+    font-size: 1.2rem;
+    /* 通常のテキストに近いサイズに縮小 */
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+.title-logo {
+    height: auto;
+    max-width: 600px;
+    width: 100%;
+    /* 適度なサイズに設定 */
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+.subtitle {
+    opacity: 0.9;
+    font-size: 1.1rem;
+}
+
+/* Container */
+main {
+    max-width: 1000px;
+    margin: 2rem auto 4rem;
+    padding: 0 1.5rem;
+}
+
+section {
+    background: var(--card-bg);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-lg);
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-left: 1rem;
+    border-left: 4px solid var(--secondary-color);
+    color: var(--primary-color);
+}
+
+/* Market Overview */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.section-header h2 {
+    margin-bottom: 0;
+}
+
+.status-timestamp {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    background: #e2e8f0;
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+}
+
+/* Featured Index (Nikkei 225) */
+.featured-index {
+    margin-bottom: 2rem;
+    padding: 2rem;
+    background: linear-gradient(to right, #ffffff, #f8fafc);
+    border-left: 6px solid var(--gold-color);
+}
+
+.featured-index label {
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.data-notice {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 2.5rem;
+    text-align: left;
+    line-height: 1.8;
+}
+
+.featured-value-container {
+    display: flex;
+    flex-direction: column;
+    /* 基本はカラム（前日比を下にするため） */
+    align-items: flex-start;
+    gap: 0.25rem;
+}
+
+.main-value {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.featured-value-container .value {
+    font-size: 3rem;
+    color: var(--primary-color);
+}
+
+.featured-value-container .unit {
+    font-size: 1.2rem;
+}
+
+.change-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-left: 1rem;
+}
+
+.indicator-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    /* 600px以下は1列 */
+    gap: 1.5rem;
+}
+
+.fund-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    /* 600px以下は1列 */
+    gap: 1rem;
+}
+
+/* Responsive Grid Settings */
+@media screen and (min-width: 601px) {
+    .indicator-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* デスクトップでは前日比を横に並べる */
+    .featured-value-container,
+    .fund-values {
+        flex-direction: row !important;
+        align-items: baseline;
+        gap: 1rem;
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    .indicator-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 1rem;
+    padding: 1.5rem;
+}
+
+.fund-card {
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fund-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.index-item label,
+.exchange-item label,
+.commodity-item label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.unit {
+    font-size: 0.9rem;
+    margin-left: 0.2rem;
+    color: var(--text-muted);
+}
+
+.fund-card {
+    background: #ffffff;
+    border: 2px solid #e2e8f0;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.fund-card:hover {
+    border-color: var(--secondary-color);
+}
+
+.fund-icon {
+    font-size: 2rem;
+}
+
+.fund-details {
+    flex: 1;
+}
+
+.fund-name {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-main);
+    margin-bottom: 0.25rem;
+}
+
+.fund-values {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.fund-price {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.fund-change {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+
+/* Simulator */
+.simulator-container {
+    background: #f8fafc;
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+    border: 1px solid #e2e8f0;
+    text-align: center;
+}
+
+.input-group-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.input-field {
+    flex: 1;
+    min-width: 200px;
+    text-align: left;
+}
+
+.input-field label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-muted);
+}
+
+.input-field select,
+.input-field input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: 0.75rem;
+    border: 2px solid #e2e8f0;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background-color: white;
+}
+
+.input-field select:focus,
+.input-field input:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+.primary-btn {
+    display: block;
+    /* 1カラムにするためブロック要素に変更 */
+    margin: 0 auto 2.5rem;
+    /* 中央寄せ */
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    color: white;
+    border: none;
+    padding: 1rem 3rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+    box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+}
+
+.primary-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+}
+
+.primary-btn:active {
+    transform: translateY(0);
+}
+
+.simulation-note {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 2.5rem;
+    /* 余白を広げて視認性を向上 */
+    text-align: left;
+    /* 左寄せに変更 */
+    line-height: 1.8;
+    /* 行間を広げて読みやすく */
+}
+
+.result-display {
+    display: block;
+    margin: 0 auto;
+    max-width: 500px;
+    /* 少し広げる */
+    padding: 2.5rem;
+    background: white;
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), inset 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.result-main {
+    margin-bottom: 1.5rem;
+}
+
+.result-label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.total-value-container {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+#total-assets {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--primary-color);
+}
+
+.result-unit {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+/* Visual Bar */
+.result-visual-bar {
+    height: 12px;
+    width: 100%;
+    background: #e2e8f0;
+    border-radius: 100px;
+    display: flex;
+    overflow: hidden;
+    margin: 2rem 0;
+}
+
+.bar-part {
+    height: 100%;
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bar-part.principal {
+    background: #94a3b8;
+    /* 元本: Grayish */
+}
+
+.bar-part.profit {
+    background: #ff4d4d;
+    /* 収益: Red (accent) */
+}
+
+.result-details {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* 1カラムに変更 */
+    gap: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #f1f5f9;
+    text-align: left;
+    /* 左寄せにしてリスト感を出す */
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    /* ラベルと値を左右に配置 */
+    align-items: center;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px dashed #f1f5f9;
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.detail-label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.detail-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.rate-highlight {
+    color: var(--secondary-color) !important;
+}
+
+.profit-color {
+    color: #ff0000 !important;
+    /* 強調された赤色 */
+}
+
+.momentum-container {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: #f0f9ff;
+    border-radius: 1rem;
+    border: 1px solid #bae6fd;
+}
+
+.momentum-label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+#current-momentum {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--secondary-color);
+    margin-left: 0.5rem;
+}
+
+.momentum-note {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+.message-container {
+    margin-bottom: 1rem;
+    min-height: 2.5rem;
+}
+
+.result-message {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    padding: 0.5rem 1rem;
+    background: #f0fdf4;
+    border-radius: 100px;
+    display: inline-block;
+}
+
+.animate-pop {
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Footer */
+footer {
+    background: #e2e8f0;
+    padding: 3rem 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 4rem;
+}
+
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.disclaimer {
+    margin-top: 1.5rem;
+    text-align: left;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 0.5rem;
+    border: 1px solid #cbd5e1;
+    line-height: 1.8;
+}
+
+.disclaimer h3 {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
+}
+
+.disclaimer p {
+    margin-bottom: 0;
+    font-size: 0.8rem;
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    section {
+        padding: 2rem 1.5rem;
+        /* 左右の余白を狭める */
+    }
+
+    /* 前日比を価格の下に配置 */
+    .featured-value-container,
+    .fund-values {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        /* 左寄せ */
+        gap: 0.25rem;
+    }
+
+    .change-value,
+    .fund-change {
+        margin-left: 0;
+        /* 横並び時の余白をリセット */
+    }
+
+    .featured-value-container .value {
+        font-size: 2.2rem;
+        /* モバイルでは少し小さく */
+    }
+
+    .simulator-container {
+        padding: 1.25rem 0.5rem;
+        /* パディングを狭める */
+        border-radius: 1rem;
+    }
+
+    .result-display {
+        padding: 1.5rem;
+    }
+
+    #total-assets {
+        font-size: 2.5rem;
+    }
+}

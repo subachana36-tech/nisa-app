@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>積み立てNISAシミュレーター</title>
+    <link rel="icon" href="favicon.ico" sizes="128x128">
+    <link rel="icon" type="image/png" href="favicon.png" sizes="622x622">
+    <link rel="apple-touch-icon" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Noto+Sans+JP:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <div class="header-container">
+            <img src="title.png" alt="積み立てNISAシミュレーター" class="title-logo">
+            <h1>積み立てNISAシミュレーター</h1>
+            <p class="subtitle">未来に向けた投資戦略をシミュレーション</p>
+        </div>
+    </header>
+
+    <main>
+        <section class="market-overview">
+            <div class="section-header">
+                <h2>基本情報・市場指標</h2>
+                <div class="status-timestamp">現在の日時: <span id="current-time">--</span></div>
+            </div>
+
+            <div class="featured-index card" id="nikkei225">
+                <label>日経平均</label>
+                <div class="featured-value-container">
+                    <div class="main-value">
+                        <span class="value" id="nikkei-value">--</span>
+                        <span class="unit">円</span>
+                    </div>
+                    <span id="nikkei-change" class="change-value"></span>
+                </div>
+            </div>
+
+            <div class="featured-index card" id="usd-jpy">
+                <label>米ドル/円</label>
+                <div class="featured-value-container">
+                    <div class="main-value">
+                        <span class="value" id="usd-jpy-value">--</span>
+                        <span class="unit">円</span>
+                    </div>
+                    <span id="usd-jpy-change" class="change-value"></span>
+                </div>
+            </div>
+
+            <div class="featured-index card" id="ny-dow">
+                <label>NYダウ</label>
+                <div class="featured-value-container">
+                    <div class="main-value">
+                        <span class="value" id="dow-value">--</span>
+                        <span class="unit">ドル</span>
+                    </div>
+                    <span id="dow-change" class="change-value"></span>
+                </div>
+            </div>
+            <p class="data-notice">※市場データは外部から自動取得しているため、通信状況により一時的に表示されない場合があります。その際は、時間を置いてからページを再読み込みしてください。</p>
+        </section>
+
+        <section class="index-list">
+            <h2>注目インデックス銘柄</h2>
+            <div class="fund-container">
+                <div class="fund-card" id="all-country" data-fund="all-country">
+                    <div class="fund-icon">🌍</div>
+                    <div class="fund-details">
+                        <div class="fund-name">オルカン (オール・カントリー)</div>
+                        <div class="fund-values">
+                            <span class="fund-price" id="all-country-value">--</span>
+                            <span class="fund-change" id="all-country-change"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="fund-card" id="sp500" data-fund="sp500">
+                    <div class="fund-icon">🇺🇸</div>
+                    <div class="fund-details">
+                        <div class="fund-name">S&P500</div>
+                        <div class="fund-values">
+                            <span class="fund-price" id="sp500-value">--</span>
+                            <span class="fund-change" id="sp500-change"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="fund-card" id="nikkei-index" data-fund="nikkei">
+                    <div class="fund-icon">🇯🇵</div>
+                    <div class="fund-details">
+                        <div class="fund-name">日経平均</div>
+                        <div class="fund-values">
+                            <span class="fund-price" id="ewj-value">--</span>
+                            <span class="fund-change" id="ewj-change"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="fund-card" id="india-nifty" data-fund="india">
+                    <div class="fund-icon">🇮🇳</div>
+                    <div class="fund-details">
+                        <div class="fund-name">インド株ETF (EPI)</div>
+                        <div class="fund-values">
+                            <span class="fund-price" id="india-value">--</span>
+                            <span class="fund-change" id="india-change"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="fund-card" id="gold-market" data-fund="gld">
+                    <div class="fund-icon">💎</div>
+                    <div class="fund-details">
+                        <div class="fund-name">金 (GLD)</div>
+                        <div class="fund-values">
+                            <span class="fund-price" id="gld-value">--</span>
+                            <span class="fund-change" id="gld-change"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="data-notice">※市場データは外部から自動取得しているため、通信状況により一時的に表示されない場合があります。その際は、時間を置いてからページを再読み込みしてください。</p>
+        </section>
+
+        <section class="asset-simulator">
+            <h2>資産計算シミュレーター</h2>
+            <div class="simulator-container">
+                <form id="calc-form">
+                    <div class="input-group-container">
+                        <div class="input-field">
+                            <label for="asset-brand">銘柄選択</label>
+                            <select id="asset-brand">
+                                <option value="all-country">全世界株式（オルカン）</option>
+                                <option value="us-stock">S&P500</option>
+                                <option value="japan-stock">日経平均</option>
+                                <option value="india-stock">インド株ETF (EPI)</option>
+                                <option value="gold">金 (GLD)</option>
+                            </select>
+                        </div>
+                        <div class="input-field">
+                            <label for="asset-period">積立期間 (年)</label>
+                            <select id="asset-period">
+                                <option value="1">1年</option>
+                                <option value="5">5年</option>
+                                <option value="10" selected>10年</option>
+                                <option value="15">15年</option>
+                                <option value="20">20年</option>
+                                <option value="25">25年</option>
+                                <option value="30">30年</option>
+                            </select>
+                        </div>
+                        <div class="input-field">
+                            <label for="asset-amount">毎月の積立額 (万円)</label>
+                            <input type="number" id="asset-amount" value="3" min="1" max="100">
+                        </div>
+                    </div>
+
+                    <button type="button" id="run-simulation" class="primary-btn">シミュレーションを実行</button>
+
+                    <div class="result-display">
+                        <div class="result-main">
+                            <span class="result-label">想定資産合計</span>
+                            <div class="total-value-container">
+                                <span id="total-assets" class="animate-value">--</span>
+                                <span class="result-unit">円</span>
+                            </div>
+                        </div>
+
+                        <div class="result-visual-bar">
+                            <div id="bar-principal" class="bar-part principal"></div>
+                            <div id="bar-profit" class="bar-part profit"></div>
+                        </div>
+
+                        <div class="result-details">
+                            <div class="detail-item">
+                                <span class="detail-label">累計積立元本</span>
+                                <span class="detail-value"><span id="total-investment">--</span> 円</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">運用収益</span>
+                                <span class="detail-value profit-color"><span id="total-profit">--</span> 円</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">適用された想定年利</span>
+                                <span class="detail-value rate-highlight"><span id="used-annual-rate">--</span> %</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="simulation-note">
+                        ※本シミュレーションは入力された条件に基づく試算であり、将来の運用成果を保証するものではありません。<br>
+                        ※本計算ツールはテスト用であり、非常に簡易的なロジックに基づいています。
+                    </p>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 NISA Asset Simulator</p>
+            <div class="disclaimer">
+                <h3>【免責事項】</h3>
+                <p>本サイトはテスト目的で作成されており、表示される株価や指標などの数値は実際の市場データと異なる場合があります。掲載情報の正確性については細心の注意を払っておりますが、その内容を保証するものではありません。本サイトの情報に基づいて行われた投資判断や、それによって生じた損害等について、当サイトは一切の責任を負いかねます。投資の最終決定は、ご自身の判断と責任において行っていただけますようお願いいたします。
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js.js"></script>
+</body>
+
+</html>
